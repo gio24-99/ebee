@@ -1,0 +1,86 @@
+import pandas as pandas
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
+import joblib
+df=pandas.read_csv('iris.csv')
+
+
+knn_model=KNeighborsClassifier(n_neighbors=3)
+# print(df)
+
+x=df.drop('lable',axis=1).values
+y=df['lable']
+
+# print(x)
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+
+knn_model.fit(x_train,y_train)
+prediction=knn_model.predict(x_test)
+score=accuracy_score(y_test,prediction)
+print(score)
+
+joblib.dump(knn_model,'merabi_joblib')
+
+import joblib
+
+model=joblib.load('merabi_joblib')
+data=model.predict([[0.5,8.5,9.0,7]])
+print(data)
+
+GAUS
+
+import pandas as p
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
+import joblib
+df = p.read_csv("iris.csv")
+
+labels = df["lable"]
+features = df.drop("lable",axis=1).values
+
+x_train,x_test,y_train,y_test = train_test_split(features,labels,test_size=0.2,random_state=42)
+model = GaussianNB()
+model.fit(x_train,y_train)
+prediciton = model.predict(x_test)
+score = accuracy_score(y_test,prediciton)
+joblib.dump(model,"model.joblib")
+
+import joblib
+
+model = joblib.load("model.joblib")
+
+prediction = model.predict([[2,4,1,0.4]])
+print(prediction)
+
+SVM
+
+import pandas as p
+from sklearn.model_selection import train_test_split
+from sklearn import svm
+from sklearn.metrics import accuracy_score
+import joblib
+df = p.read_csv("iris.csv")
+
+
+x = df.drop("lable",axis=1).values
+
+y= df[("lable")]
+print(y)
+
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=42)
+
+model = svm.SVC()
+model.fit(x_train,y_train)
+prediction = model.predict(x_test)
+score=accuracy_score(y_test,prediction)
+print(score)
+joblib.dump(value=model,filename="Giushki1.joblib")
+
+import joblib
+
+model=joblib.load("Giushki1.joblib")
+prediction=model.predict([[2,5,3,2]])
+print(prediction)
